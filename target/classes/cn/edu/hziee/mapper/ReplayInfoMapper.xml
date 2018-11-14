@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.mapper.ReplayInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.hziee.model.ReplayInfo">
+    <id column="replay_id" jdbcType="INTEGER" property="replayId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="to_user_id" jdbcType="INTEGER" property="toUserId" />
+    <result column="pic_id" jdbcType="INTEGER" property="picId" />
+    <result column="replay_content" jdbcType="VARCHAR" property="replayContent" />
+    <result column="replay_time" jdbcType="VARCHAR" property="replayTime" />
+    <result column="replay_state" jdbcType="VARCHAR" property="replayState" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    replay_id, user_id, to_user_id, pic_id, replay_content, replay_time, replay_state
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from replay_info
+    where replay_id = #{replayId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from replay_info
+    where replay_id = #{replayId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hziee.model.ReplayInfo">
+    <selectKey keyProperty="replayId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into replay_info (user_id, to_user_id, pic_id, 
+      replay_content, replay_time, replay_state
+      )
+    values (#{userId,jdbcType=INTEGER}, #{toUserId,jdbcType=INTEGER}, #{picId,jdbcType=INTEGER}, 
+      #{replayContent,jdbcType=VARCHAR}, #{replayTime,jdbcType=VARCHAR}, #{replayState,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.hziee.model.ReplayInfo">
+    <selectKey keyProperty="replayId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into replay_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="toUserId != null">
+        to_user_id,
+      </if>
+      <if test="picId != null">
+        pic_id,
+      </if>
+      <if test="replayContent != null">
+        replay_content,
+      </if>
+      <if test="replayTime != null">
+        replay_time,
+      </if>
+      <if test="replayState != null">
+        replay_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="toUserId != null">
+        #{toUserId,jdbcType=INTEGER},
+      </if>
+      <if test="picId != null">
+        #{picId,jdbcType=INTEGER},
+      </if>
+      <if test="replayContent != null">
+        #{replayContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replayTime != null">
+        #{replayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="replayState != null">
+        #{replayState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.ReplayInfo">
+    update replay_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="toUserId != null">
+        to_user_id = #{toUserId,jdbcType=INTEGER},
+      </if>
+      <if test="picId != null">
+        pic_id = #{picId,jdbcType=INTEGER},
+      </if>
+      <if test="replayContent != null">
+        replay_content = #{replayContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replayTime != null">
+        replay_time = #{replayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="replayState != null">
+        replay_state = #{replayState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where replay_id = #{replayId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.ReplayInfo">
+    update replay_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      to_user_id = #{toUserId,jdbcType=INTEGER},
+      pic_id = #{picId,jdbcType=INTEGER},
+      replay_content = #{replayContent,jdbcType=VARCHAR},
+      replay_time = #{replayTime,jdbcType=VARCHAR},
+      replay_state = #{replayState,jdbcType=VARCHAR}
+    where replay_id = #{replayId,jdbcType=INTEGER}
+  </update>
+</mapper>

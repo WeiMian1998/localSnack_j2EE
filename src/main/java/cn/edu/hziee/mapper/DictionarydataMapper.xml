@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.mapper.DictionarydataMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.hziee.model.Dictionarydata">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="is_show" jdbcType="INTEGER" property="isShow" />
+    <result column="sort_id" jdbcType="INTEGER" property="sortId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, pid, is_show, sort_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dictionarydata
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dictionarydata
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hziee.model.Dictionarydata">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dictionarydata (name, pid, is_show, 
+      sort_id)
+    values (#{name,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{isShow,jdbcType=INTEGER}, 
+      #{sortId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.hziee.model.Dictionarydata">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dictionarydata
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="isShow != null">
+        is_show,
+      </if>
+      <if test="sortId != null">
+        sort_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="isShow != null">
+        #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null">
+        #{sortId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.Dictionarydata">
+    update dictionarydata
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="isShow != null">
+        is_show = #{isShow,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null">
+        sort_id = #{sortId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.Dictionarydata">
+    update dictionarydata
+    set name = #{name,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      is_show = #{isShow,jdbcType=INTEGER},
+      sort_id = #{sortId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

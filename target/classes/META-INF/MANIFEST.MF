@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: Part3_1
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: lenovo
+Implementation-Vendor-Id: cn.edu.hziee
+Build-Jdk: 1.8.0_66
+Implementation-URL: http://projects.spring.io/spring-boot/Part3_1/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.mapper.ShopInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.hziee.model.ShopInfo">
+    <id column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="cuisine_id" jdbcType="INTEGER" property="cuisineId" />
+    <result column="air_id" jdbcType="INTEGER" property="airId" />
+    <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="shop_address" jdbcType="VARCHAR" property="shopAddress" />
+    <result column="shop_telphone" jdbcType="VARCHAR" property="shopTelphone" />
+    <result column="shop_image" jdbcType="VARCHAR" property="shopImage" />
+    <result column="hot" jdbcType="VARCHAR" property="hot" />
+    <result column="office_hours" jdbcType="VARCHAR" property="officeHours" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    shop_id, user_id, area_id, cuisine_id, air_id, shop_name, content, shop_address, 
+    shop_telphone, shop_image, hot, office_hours
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shop_info
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from shop_info
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hziee.model.ShopInfo">
+    <selectKey keyProperty="shopId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into shop_info (user_id, area_id, cuisine_id, 
+      air_id, shop_name, content, 
+      shop_address, shop_telphone, shop_image, 
+      hot, office_hours)
+    values (#{userId,jdbcType=INTEGER}, #{areaId,jdbcType=INTEGER}, #{cuisineId,jdbcType=INTEGER}, 
+      #{airId,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{shopAddress,jdbcType=VARCHAR}, #{shopTelphone,jdbcType=VARCHAR}, #{shopImage,jdbcType=VARCHAR}, 
+      #{hot,jdbcType=VARCHAR}, #{officeHours,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.hziee.model.ShopInfo">
+    <selectKey keyProperty="shopId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into shop_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="cuisineId != null">
+        cuisine_id,
+      </if>
+      <if test="airId != null">
+        air_id,
+      </if>
+      <if test="shopName != null">
+        shop_name,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="shopAddress != null">
+        shop_address,
+      </if>
+      <if test="shopTelphone != null">
+        shop_telphone,
+      </if>
+      <if test="shopImage != null">
+        shop_image,
+      </if>
+      <if test="hot != null">
+        hot,
+      </if>
+      <if test="officeHours != null">
+        office_hours,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="cuisineId != null">
+        #{cuisineId,jdbcType=INTEGER},
+      </if>
+      <if test="airId != null">
+        #{airId,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null">
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAddress != null">
+        #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTelphone != null">
+        #{shopTelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="shopImage != null">
+        #{shopImage,jdbcType=VARCHAR},
+      </if>
+      <if test="hot != null">
+        #{hot,jdbcType=VARCHAR},
+      </if>
+      <if test="officeHours != null">
+        #{officeHours,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.ShopInfo">
+    update shop_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=INTEGER},
+      </if>
+      <if test="cuisineId != null">
+        cuisine_id = #{cuisineId,jdbcType=INTEGER},
+      </if>
+      <if test="airId != null">
+        air_id = #{airId,jdbcType=INTEGER},
+      </if>
+      <if test="shopName != null">
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAddress != null">
+        shop_address = #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shopTelphone != null">
+        shop_telphone = #{shopTelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="shopImage != null">
+        shop_image = #{shopImage,jdbcType=VARCHAR},
+      </if>
+      <if test="hot != null">
+        hot = #{hot,jdbcType=VARCHAR},
+      </if>
+      <if test="officeHours != null">
+        office_hours = #{officeHours,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.ShopInfo">
+    update shop_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=INTEGER},
+      cuisine_id = #{cuisineId,jdbcType=INTEGER},
+      air_id = #{airId,jdbcType=INTEGER},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      shop_address = #{shopAddress,jdbcType=VARCHAR},
+      shop_telphone = #{shopTelphone,jdbcType=VARCHAR},
+      shop_image = #{shopImage,jdbcType=VARCHAR},
+      hot = #{hot,jdbcType=VARCHAR},
+      office_hours = #{officeHours,jdbcType=VARCHAR}
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByShopId" parameterType="cn.edu.hziee.model.ShopInfo">
+    update shop_info
+    set area_id = #{areaId,jdbcType=INTEGER},
+      cuisine_id = #{cuisineId,jdbcType=INTEGER},
+      air_id = #{airId,jdbcType=INTEGER},
+      shop_name = #{shopName,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      shop_address = #{shopAddress,jdbcType=VARCHAR},
+      shop_telphone = #{shopTelphone,jdbcType=VARCHAR},
+      office_hours = #{officeHours,jdbcType=VARCHAR}
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByImg" parameterType="cn.edu.hziee.model.ShopInfo">
+    update shop_info
+    set shop_image = #{shopImage,jdbcType=VARCHAR}
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </update>    
+<!--   <select id="findByUserId" parameterType="cn.edu.hziee.model.ShopInfo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shop_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select> -->
+</mapper>

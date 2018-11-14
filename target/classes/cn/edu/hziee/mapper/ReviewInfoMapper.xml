@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.mapper.ReviewInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.hziee.model.ReviewInfo">
+    <id column="review_id" jdbcType="INTEGER" property="reviewId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="review_content" jdbcType="VARCHAR" property="reviewContent" />
+    <result column="review_time" jdbcType="VARCHAR" property="reviewTime" />
+    <result column="taste" jdbcType="DOUBLE" property="taste" />
+    <result column="environment" jdbcType="DOUBLE" property="environment" />
+    <result column="service" jdbcType="DOUBLE" property="service" />
+    <result column="review_score" jdbcType="DOUBLE" property="reviewScore" />
+    <result column="review_state" jdbcType="INTEGER" property="reviewState" />
+    <result column="good" jdbcType="INTEGER" property="good" />
+    <result column="replay" jdbcType="INTEGER" property="replay" />
+    <result column="people_avg" jdbcType="DOUBLE" property="peopleAvg" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    review_id, user_id, shop_id, review_content, review_time, taste, environment, service, 
+    review_score, review_state, good, replay, people_avg
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from review_info
+    where review_id = #{reviewId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from review_info
+    where review_id = #{reviewId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hziee.model.ReviewInfo">
+    <selectKey keyProperty="reviewId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into review_info (user_id, shop_id, review_content, 
+      review_time, taste, environment, 
+      service, review_score, review_state, 
+      good, replay, people_avg
+      )
+    values (#{userId,jdbcType=INTEGER}, #{shopId,jdbcType=INTEGER}, #{reviewContent,jdbcType=VARCHAR}, 
+      #{reviewTime,jdbcType=VARCHAR}, #{taste,jdbcType=DOUBLE}, #{environment,jdbcType=DOUBLE}, 
+      #{service,jdbcType=DOUBLE}, #{reviewScore,jdbcType=DOUBLE}, #{reviewState,jdbcType=INTEGER}, 
+      #{good,jdbcType=INTEGER}, #{replay,jdbcType=INTEGER}, #{peopleAvg,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.hziee.model.ReviewInfo">
+    <selectKey keyProperty="reviewId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into review_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="reviewContent != null">
+        review_content,
+      </if>
+      <if test="reviewTime != null">
+        review_time,
+      </if>
+      <if test="taste != null">
+        taste,
+      </if>
+      <if test="environment != null">
+        environment,
+      </if>
+      <if test="service != null">
+        service,
+      </if>
+      <if test="reviewScore != null">
+        review_score,
+      </if>
+      <if test="reviewState != null">
+        review_state,
+      </if>
+      <if test="good != null">
+        good,
+      </if>
+      <if test="replay != null">
+        replay,
+      </if>
+      <if test="peopleAvg != null">
+        people_avg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="reviewContent != null">
+        #{reviewContent,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewTime != null">
+        #{reviewTime,jdbcType=VARCHAR},
+      </if>
+      <if test="taste != null">
+        #{taste,jdbcType=DOUBLE},
+      </if>
+      <if test="environment != null">
+        #{environment,jdbcType=DOUBLE},
+      </if>
+      <if test="service != null">
+        #{service,jdbcType=DOUBLE},
+      </if>
+      <if test="reviewScore != null">
+        #{reviewScore,jdbcType=DOUBLE},
+      </if>
+      <if test="reviewState != null">
+        #{reviewState,jdbcType=INTEGER},
+      </if>
+      <if test="good != null">
+        #{good,jdbcType=INTEGER},
+      </if>
+      <if test="replay != null">
+        #{replay,jdbcType=INTEGER},
+      </if>
+      <if test="peopleAvg != null">
+        #{peopleAvg,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.ReviewInfo">
+    update review_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="reviewContent != null">
+        review_content = #{reviewContent,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewTime != null">
+        review_time = #{reviewTime,jdbcType=VARCHAR},
+      </if>
+      <if test="taste != null">
+        taste = #{taste,jdbcType=DOUBLE},
+      </if>
+      <if test="environment != null">
+        environment = #{environment,jdbcType=DOUBLE},
+      </if>
+      <if test="service != null">
+        service = #{service,jdbcType=DOUBLE},
+      </if>
+      <if test="reviewScore != null">
+        review_score = #{reviewScore,jdbcType=DOUBLE},
+      </if>
+      <if test="reviewState != null">
+        review_state = #{reviewState,jdbcType=INTEGER},
+      </if>
+      <if test="good != null">
+        good = #{good,jdbcType=INTEGER},
+      </if>
+      <if test="replay != null">
+        replay = #{replay,jdbcType=INTEGER},
+      </if>
+      <if test="peopleAvg != null">
+        people_avg = #{peopleAvg,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where review_id = #{reviewId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.ReviewInfo">
+    update review_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      review_content = #{reviewContent,jdbcType=VARCHAR},
+      review_time = #{reviewTime,jdbcType=VARCHAR},
+      taste = #{taste,jdbcType=DOUBLE},
+      environment = #{environment,jdbcType=DOUBLE},
+      service = #{service,jdbcType=DOUBLE},
+      review_score = #{reviewScore,jdbcType=DOUBLE},
+      review_state = #{reviewState,jdbcType=INTEGER},
+      good = #{good,jdbcType=INTEGER},
+      replay = #{replay,jdbcType=INTEGER},
+      people_avg = #{peopleAvg,jdbcType=DOUBLE}
+    where review_id = #{reviewId,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByMy" parameterType="cn.edu.hziee.model.ReviewInfo">
+    update review_info
+    set user_id = #{userId,jdbcType=INTEGER},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      review_content = #{reviewContent,jdbcType=VARCHAR},
+      review_time = #{reviewTime,jdbcType=VARCHAR},
+      taste = #{taste,jdbcType=DOUBLE},
+      environment = #{environment,jdbcType=DOUBLE},
+      service = #{service,jdbcType=DOUBLE},
+      review_score = #{reviewScore,jdbcType=DOUBLE},
+      review_state = #{reviewState,jdbcType=INTEGER},
+      people_avg = #{peopleAvg,jdbcType=DOUBLE}
+    where review_id = #{reviewId,jdbcType=INTEGER}
+  </update>
+</mapper>

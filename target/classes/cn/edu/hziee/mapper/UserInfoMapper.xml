@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.hziee.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.hziee.model.UserInfo">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="token_time" jdbcType="VARCHAR" property="tokenTime" />
+    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="head" jdbcType="VARCHAR" property="head" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="is_shopping" jdbcType="VARCHAR" property="isShopping" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, account, password, user_name, token, token_time, telphone, sex, head, address, 
+    real_name, introduce, is_shopping
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.hziee.model.UserInfo">
+    <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_info (account, password, user_name, 
+      token, token_time, telphone, 
+      sex, head, address, 
+      real_name, introduce, is_shopping
+      )
+    values (#{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{tokenTime,jdbcType=VARCHAR}, #{telphone,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{head,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, #{isShopping,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.hziee.model.UserInfo">
+    <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="account != null">
+        account,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="tokenTime != null">
+        token_time,
+      </if>
+      <if test="telphone != null">
+        telphone,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="head != null">
+        head,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="introduce != null">
+        introduce,
+      </if>
+      <if test="isShopping != null">
+        is_shopping,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenTime != null">
+        #{tokenTime,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="head != null">
+        #{head,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="isShopping != null">
+        #{isShopping,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.hziee.model.UserInfo">
+    update user_info
+    <set>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenTime != null">
+        token_time = #{tokenTime,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="head != null">
+        head = #{head,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="isShopping != null">
+        is_shopping = #{isShopping,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.hziee.model.UserInfo">
+    update user_info
+    set account = #{account,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      token_time = #{tokenTime,jdbcType=VARCHAR},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      head = #{head,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=VARCHAR},
+      is_shopping = #{isShopping,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  
+   <select id="findByToken" parameterType="cn.edu.hziee.model.UserInfo" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from user_info
+  	where token = #{token,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findByAccount" parameterType="cn.edu.hziee.model.UserInfo" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from user_info
+  	where account = #{account,jdbcType=VARCHAR}
+  </select>
+	
+  <update id="updateByToken" parameterType="cn.edu.hziee.model.UserInfo">
+    update user_info
+    <set>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenTime != null">
+        token_time = #{tokenTime,jdbcType=VARCHAR},
+      </if>
+      <if test="telphone != null">
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="head != null">
+        head = #{head,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null">
+        introduce = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="isShopping != null">
+        is_shopping = #{isShopping,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where token = #{token,jdbcType=VARCHAR}
+  </update>
+  <select id="login" parameterType="cn.edu.hziee.model.UserInfo" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from user_info
+  	where account = #{account,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
+  </select>
+</mapper>
